@@ -3,62 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>STONE FAMILY — Управление</title>
+<title>STONE FAMILY — Калькулятор</title>
 <style>
+  /* === ПЕРЕМЕННЫЕ === */
   :root {
     --bg-dark: #0F1A26; --bg-panel: #1A2B3C; --bg-panel-2: #22384F;
-    --orange: #E64A19; --orange-light: #FF7043; --orange-soft: #FFCCBC;
-    --text: #FFFFFF; --text-muted: #A0B4C8;
-    --green: #4CAF50; --red: #E53935; --blue: #2196F3;
+    --orange: #E64A19; --orange-light: #FF7043; --text: #FFFFFF;
+    --text-muted: #A0B4C8; --green: #4CAF50; --red: #E53935; --blue: #2196F3;
     --input-bg: #FFCCBC; --input-text: #3E2723;
     --r-gk: #FFD700; --r10: #FFD700; --r9: #FF9800; --r8: #2196F3;
-    --r7: #E91E63; --r6: #9C27B0; --r5: #673AB7; --r4: #FF9800;
+    --r7: #E91E63; --r6: #9C27B0; --r5: #673AB7; --r4: #795548;
     --r3: #8BC34A; --r2: #795548;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg-dark); color: var(--text); min-height: 100vh; font-size: 14px; overflow-x: hidden; }
   
-  .splash-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg-dark); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; z-index: 9999;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
+  /* === СПЛЭШ === */
+  .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease; }
   .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .splash-logo {
-    width: 120px; height: 120px; background: var(--orange);
-    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-    margin-bottom: 30px; animation: pulse 2s infinite ease-in-out;
-    box-shadow: 0 0 40px rgba(230, 74, 25, 0.4);
-  }
+  .splash-logo { width: 120px; height: 120px; background: var(--orange); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); margin-bottom: 30px; animation: pulse 2s infinite ease-in-out; box-shadow: 0 0 40px rgba(230, 74, 25, 0.4); }
   .splash-title { font-size: 32px; letter-spacing: 4px; color: var(--text); opacity: 0; animation: slideUp 1s forwards 0.5s; }
   .splash-title span { color: var(--orange-light); }
   .splash-subtitle { font-size: 16px; color: var(--text-muted); margin-top: 10px; opacity: 0; animation: slideUp 1s forwards 1s; }
   @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  header {
-    background: linear-gradient(135deg, var(--bg-panel), var(--bg-dark));
-    padding: 15px 20px; border-bottom: 3px solid var(--orange);
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-    position: relative; z-index: 100;
-  }
+  /* === ШАПКА И НАВИГАЦИЯ === */
+  header { background: linear-gradient(135deg, var(--bg-panel), var(--bg-dark)); padding: 15px 20px; border-bottom: 3px solid var(--orange); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; position: relative; z-index: 100; }
   header h1 { font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
   header h1 span { color: var(--orange-light); }
   .logo-icon { width: 28px; height: 28px; background: var(--orange); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); display: inline-block; }
   .burger-menu { display: none; background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; padding: 5px; }
   
-  nav {
-    display: flex; gap: 5px; padding: 10px 20px; background: var(--bg-panel);
-    flex-wrap: wrap; border-bottom: 1px solid var(--bg-panel-2); transition: all 0.3s;
-  }
-  nav button {
-    background: transparent; border: 2px solid transparent; color: var(--text-muted);
-    padding: 8px 15px; cursor: pointer; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.2s;
-  }
+  nav { display: flex; gap: 5px; padding: 10px 20px; background: var(--bg-panel); flex-wrap: wrap; border-bottom: 1px solid var(--bg-panel-2); transition: all 0.3s; }
+  nav button { background: transparent; border: 2px solid transparent; color: var(--text-muted); padding: 8px 15px; cursor: pointer; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.2s; }
   nav button:hover { color: var(--text); background: var(--bg-panel-2); }
   nav button.active { color: var(--text); background: var(--orange); border-color: var(--orange-light); }
 
+  /* === ОСНОВНОЙ КОНТЕНТ === */
   main { padding: 20px; max-width: 1600px; margin: 0 auto; }
   .page { display: none; }
   .page.active { display: block; animation: fade 0.3s; }
@@ -72,11 +54,12 @@
   .stat .value { font-size: 22px; font-weight: 700; }
   .stat.big .value { font-size: 26px; color: var(--orange-light); }
   
-  .table-wrap { overflow-x: auto; max-height: 60vh; }
+  .table-wrap { overflow-x: auto; max-height: 60vh; border-radius: 8px; border: 1px solid var(--bg-panel-2); }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  table th { background: var(--orange); color: var(--text); padding: 10px 8px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 10; }
-  table td { padding: 8px; border-bottom: 1px solid var(--bg-panel-2); vertical-align: middle; }
-  table tr:hover td { background: var(--bg-panel-2); }
+  table th { background: var(--orange); color: var(--text); padding: 10px 8px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 10; border-right: 1px solid rgba(255,255,255,0.1); }
+  table td { padding: 8px; border-bottom: 1px solid var(--bg-panel-2); border-right: 1px solid var(--bg-panel-2); vertical-align: middle; text-align: center; }
+  table tr:nth-child(even) td { background-color: rgba(255,255,255,0.02); }
+  table tr:hover td { background-color: var(--bg-panel-2); }
   
   input, select { background: var(--input-bg); color: var(--input-text); border: none; padding: 8px 10px; border-radius: 4px; font-size: 14px; width: 100%; font-family: inherit; font-weight: 500; }
   input:focus, select:focus { outline: 2px solid var(--orange-light); }
@@ -102,6 +85,7 @@
   .help { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
   .flex-between { display: flex; justify-content: space-between; align-items: center; }
 
+  /* === УЧАСТНИКИ === */
   .status-block { margin-bottom: 15px; border-radius: 8px; overflow: hidden; border: 1px solid var(--bg-panel-2); }
   .status-header { padding: 12px 15px; font-weight: bold; font-size: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
   .status-header:hover { filter: brightness(1.1); }
@@ -118,12 +102,22 @@
   .mobile-card .row2 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; font-size: 12px; margin-bottom: 5px; }
   .mobile-card .row3 { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--bg-panel); padding-top: 5px; margin-top: 5px; }
 
+  /* === РАБОЧАЯ НЕДЕЛЯ === */
   .days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; }
-  .day-card { background: var(--bg-panel-2); border-radius: 8px; padding: 15px; border-top: 3px solid var(--orange); display: flex; flex-direction: column; }
-  .day-card h3 { font-size: 15px; margin-bottom: 10px; color: var(--orange-light); display: flex; justify-content: space-between; align-items: center; }
+  .day-card { background: var(--bg-panel-2); border-radius: 8px; padding: 15px; border-top: 3px solid var(--orange); display: flex; flex-direction: column; transition: max-height 0.3s ease, padding 0.3s ease; overflow: hidden; }
+  .day-card.collapsed { padding: 10px 15px; max-height: 50px; }
+  .day-card h3 { font-size: 15px; margin-bottom: 10px; color: var(--orange-light); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .day-card.collapsed h3 { margin-bottom: 0; }
+  .day-card .collapse-content { display: block; }
+  .day-card.collapsed .collapse-content { display: none; }
   .day-card.metallurgy { border-top-color: #D84315; } .day-card.metallurgy h3 { color: #FF7043; }
   .day-card.goods { border-top-color: #2196F3; } .day-card.goods h3 { color: #64B5F6; }
   .day-card.atelier { border-top-color: #9C27B0; } .day-card.atelier h3 { color: #CE93D8; }
+  
+  .status-mini { font-size: 12px; padding: 2px 6px; border-radius: 4px; margin-left: auto; margin-right: 10px; }
+  .status-mini.closed { background: rgba(76, 175, 80, 0.2); color: var(--green); border: 1px solid var(--green); }
+  .status-mini.open { background: rgba(255, 152, 0, 0.2); color: var(--orange); border: 1px solid var(--orange); }
+
   .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px; }
   .form-row label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; }
   .contract-status { font-size: 13px; font-weight: bold; padding: 6px 10px; border-radius: 4px; text-align: center; margin-bottom: 10px; }
@@ -131,10 +125,12 @@
   .contract-open { background: rgba(255, 152, 0, 0.2); color: #FFB74D; border: 1px solid #FF9800; }
   .info-badge { background: var(--bg-panel); padding: 4px 8px; border-radius: 4px; font-size: 12px; color: var(--text-muted); margin-bottom: 10px; display: inline-block; }
 
+  /* === ЭКСПОРТ === */
   .export-panel { background: var(--bg-panel-2); padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px dashed var(--orange); }
   .export-panel h3 { font-size: 14px; color: var(--orange-light); margin-bottom: 10px; text-transform: uppercase; }
   .export-preview { background: #000; color: #00FF00; font-family: 'Courier New', monospace; padding: 10px; border-radius: 4px; font-size: 13px; max-height: 120px; overflow-y: auto; margin-bottom: 10px; white-space: pre-wrap; }
 
+  /* === МОДАЛКИ === */
   .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
   .modal-overlay.show { opacity: 1; pointer-events: auto; }
   .modal-content { background: var(--bg-panel); border-radius: 10px; padding: 25px; width: 90%; max-width: 500px; border-top: 4px solid var(--orange); box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(-20px); transition: transform 0.2s; max-height: 90vh; overflow-y: auto; }
@@ -144,6 +140,13 @@
   .modal-form label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
   .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
 
+  /* === СЕТКА КОЭФФИЦИЕНТОВ === */
+  .coeff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px; }
+  .coeff-item { background: var(--bg-panel-2); padding: 10px; border-radius: 6px; text-align: center; border-left: 3px solid var(--orange-light); }
+  .coeff-item label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+  .coeff-item input { text-align: center; padding: 5px; font-size: 14px; }
+
+  /* === АДАПТАЦИЯ === */
   @media (max-width: 1024px) {
     .days-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
   }
@@ -152,7 +155,7 @@
     header { padding: 10px 15px; }
     header h1 { font-size: 18px; }
     .burger-menu { display: block; }
-    nav { position: absolute; top: 60px; left: 0; right: 0; background: var(--bg-panel); flex-direction: column; padding: 10px; border-bottom: 2px solid var(--orange); z-index: 99; transform: translateY(-100%); opacity: 0; pointer-events: none; }
+    nav { position: absolute; top: 55px; left: 0; right: 0; background: var(--bg-panel); flex-direction: column; padding: 10px; border-bottom: 2px solid var(--orange); z-index: 999; transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.2s; }
     nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
     nav button { width: 100%; text-align: left; margin-bottom: 5px; }
     main { padding: 10px; }
@@ -177,7 +180,7 @@
 <div class="splash-screen" id="splash-screen">
   <div class="splash-logo"></div>
   <div class="splash-title">STONE <span>FAMILY</span></div>
-  <div class="splash-subtitle">Добро пожаловать в систему управления</div>
+  <div class="splash-subtitle">Калькулятор премий</div>
 </div>
 
 <header>
@@ -197,14 +200,13 @@
 </nav>
 
 <main>
-  <!-- ДАШБОРД -->
   <section class="page active" id="page-dashboard">
     <div class="card">
       <h2>СВОДКА НЕДЕЛИ</h2>
       <div class="grid-stats">
-        <div class="stat big"><div class="label">Общая прибыль</div><div class="value" id="d-profit">0</div></div>
-        <div class="stat big"><div class="label">Выплаты участникам</div><div class="value" id="d-fund">0</div></div>
-        <div class="stat big"><div class="label">Остаток в казну</div><div class="value" id="d-balance">0</div></div>
+        <div class="stat big"><div class="label">Общая прибыль</div><div class="value" id="d-profit">0 $</div></div>
+        <div class="stat big"><div class="label">Выплаты участникам</div><div class="value" id="d-fund">0 $</div></div>
+        <div class="stat big"><div class="label">Остаток в казну</div><div class="value" id="d-balance">0 $</div></div>
         <div class="stat"><div class="label">Получателей</div><div class="value" id="d-recipients">0</div></div>
       </div>
     </div>
@@ -212,7 +214,7 @@
       <h2>ВЕДОМОСТЬ ВЫПЛАТ</h2>
       <div class="table-wrap desktop-table">
         <table>
-          <thead><tr><th>Статик</th><th>Участник</th><th>Ранг</th><th>Итог к выплате</th></tr></thead>
+          <thead><tr><th style="text-align:center;">Статик</th><th style="text-align:left;">Участник</th><th style="text-align:center;">Ранг</th><th style="text-align:center;">Итог к выплате</th></tr></thead>
           <tbody id="payouts-body"><tr><td colspan="4" class="empty">Пока никто не получает премию</td></tr></tbody>
         </table>
       </div>
@@ -230,16 +232,19 @@
     </div>
   </section>
 
-  <!-- УЧАСТНИКИ -->
   <section class="page" id="page-participants">
     <div class="toolbar" style="margin-bottom:20px;">
-      <input type="text" id="search-participant" placeholder="Поиск по имени..." oninput="renderParticipants()" style="max-width:300px;">
+      <select id="search-type" style="max-width:120px; background:var(--bg-panel-2); color:var(--text); border:1px solid var(--text-muted);">
+        <option value="name">По имени</option>
+        <option value="static">По статику</option>
+        <option value="rank">По рангу</option>
+      </select>
+      <input type="text" id="search-participant" placeholder="Введите значение..." oninput="renderParticipants()" style="max-width:300px;">
       <button class="btn" onclick="openAddModal()">+ Добавить участника</button>
     </div>
     <div id="participants-container"></div>
   </section>
 
-  <!-- РАБОЧАЯ НЕДЕЛЯ -->
   <section class="page" id="page-week">
     <div class="card">
       <h2>РАБОЧАЯ НЕДЕЛЯ</h2>
@@ -248,12 +253,11 @@
         <button class="btn btn-outline" onclick="addDirectionBlock('Товары')">+ Товары</button>
         <button class="btn btn-outline" onclick="addDirectionBlock('Ателье')">+ Ателье</button>
       </div>
-      <p class="help">Контракт закрывается только при достижении нормы. Вводите количество для каждого участника.</p>
+      <p class="help">Нажми на день недели, чтобы свернуть/развернуть его. Контракт закрывается только при достижении нормы.</p>
     </div>
     <div id="directions-container"></div>
   </section>
 
-  <!-- НАСТРОЙКИ -->
   <section class="page" id="page-settings">
     <div class="card">
       <h2>НАСТРОЙКИ НЕДЕЛИ</h2>
@@ -264,15 +268,9 @@
     </div>
     <div class="card">
       <h2>КОЭФФИЦИЕНТЫ РАНГОВ</h2>
-      <table>
-        <thead><tr><th>Ранг</th><th>Коэффициент</th><th>Правило</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>0</td><td>Ранг 1 и ниже — 0%</td></tr>
-          <tr><td>2</td><td>0.5</td><td>Ранг 2 — 50%</td></tr>
-          <tr><td>3</td><td>0.75</td><td>Ранг 3 — 75%</td></tr>
-          <tr><td>4+</td><td>1.0</td><td>Ранг 4 и выше — 100%</td></tr>
-        </tbody>
-      </table>
+      <p class="help">Настройте множитель для каждого ранга (от 0 до 1).</p>
+      <div class="coeff-grid" id="rank-coeffs-body"></div>
+      <div style="margin-top:15px;"><button class="btn btn-green" onclick="saveCoeffs()">Сохранить коэффициенты</button></div>
     </div>
     <div class="card">
       <h2>ДОЛИ КОНТРАКТА В ФОНД ПРЕМИЙ</h2>
@@ -285,10 +283,12 @@
     </div>
   </section>
 
-  <!-- ДАННЫЕ -->
   <section class="page" id="page-data">
     <div class="card">
-      <h2>АРХИВ НЕДЕЛЬ</h2>
+      <div class="flex-between" style="margin-bottom:15px;">
+        <h2 style="margin:0;">АРХИВ НЕДЕЛЬ</h2>
+        <button class="btn btn-danger" style="padding:6px 10px; min-height:auto; font-size:12px;" onclick="confirmClearArchive()">🗑 Удалить все</button>
+      </div>
       <div id="week-history"><p class="empty">Архив пока пуст</p></div>
     </div>
     <div class="card">
@@ -299,7 +299,7 @@
         <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
         <button class="btn btn-blue" onclick="resetToDefaults()">🔄 Сбросить список участников</button>
         <button class="btn btn-danger" onclick="newWeek()">🔄 Начать новую неделю</button>
-        <button class="btn btn-danger" onclick="clearAllData()">🗑 Очистить всё</button>
+        <button class="btn btn-danger" onclick="confirmClearAll()">🗑 Очистить всё</button>
       </div>
     </div>
   </section>
@@ -328,25 +328,45 @@
   </div>
 </div>
 
+<!-- Модалка подтверждения удаления -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal-content">
+    <h2 id="confirm-title">Вы уверены?</h2>
+    <p id="confirm-text" style="margin-bottom:20px; color:var(--text-muted); line-height:1.5;"></p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeConfirmModal()">Отмена</button>
+      <button class="btn btn-danger" id="confirm-btn">Удалить</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-const DEFAULT_BLACKLIST_REASONS = {
-  'Akira Moon': '', 'Hayden Merriwether': 'Участие в похищение ЗГВ и ГК', 'Mozart Merriwether': 'Участие в похищение ЗГВ и ГК',
-  'Lyonya Bizzy': 'Слив информации с сервера семьи', 'Magic Divergent': 'Похищение Глав Врача', 'Roland Verhoviy': 'Душнила',
-  'Ilysha Stone': 'Несоответствие моральным ценностям семьи', 'Calvin Stone': 'Слив личной информации', 'Apollo Verhovniy': 'Душнила',
-  'Damiil Hobbs': 'Несоответствие моральным ценностям семьи', 'Aisha Henson': 'Предательство семьи и союзных семей',
-  'Griff Grex': 'Введение в заблуждение руководства семьи', 'Artem Stone': 'Кража вещей в семье',
-  'Artemchik Moretti': 'Предательство союзной семьи', 'Modest Velasco': 'Предатель из Веласко',
-  'Ozzi Velasco': 'Предатель из Веласко', 'Santiago Velasco': 'Предатель из Веласко', 'Rober Velasco': 'Предатель из Веласко'
-};
-const BLACKLIST_STATICS = {
-  'Akira Moon': '210276', 'Hayden Merriwether': '249494', 'Mozart Merriwether': '331264', 'Lyonya Bizzy': '377510',
-  'Magic Divergent': '281716', 'Roland Verhoviy': '283462', 'Ilysha Stone': '385788', 'Calvin Stone': '436171',
-  'Apollo Verhovniy': '1538', 'Damiil Hobbs': '292056', 'Aisha Henson': '378375', 'Griff Grex': '419399',
-  'Artem Stone': '480038', 'Artemchik Moretti': '458590', 'Modest Velasco': '59114', 'Ozzi Velasco': '238023',
-  'Santiago Velasco': '433414', 'Rober Velasco': '502967'
-};
+// ==========================================
+// ДАННЫЕ
+// ==========================================
+const BLACKLIST_DATA = [
+  { name: 'Akira Moon', static: '210276', reason: '' },
+  { name: 'Hayden Merriwether', static: '249494', reason: 'Участие в похищение ЗГВ и ГК' },
+  { name: 'Mozart Merriwether', static: '331264', reason: 'Участие в похищение ЗГВ и ГК' },
+  { name: 'Lyonya Bizzy', static: '377510', reason: 'Слив информации с сервера семьи' },
+  { name: 'Magic Divergent', static: '281716', reason: 'Похищение Глав Врача' },
+  { name: 'Roland Verhoviy', static: '283462', reason: 'Душнила' },
+  { name: 'Ilysha Stone', static: '385788', reason: 'Несоответствие моральным ценностям семьи' },
+  { name: 'Calvin Stone', static: '436171', reason: 'Слив личной информации' },
+  { name: 'Apollo Verhovniy', static: '1538', reason: 'Душнила' },
+  { name: 'Damiil Hobbs', static: '292056', reason: 'Несоответствие моральным ценностям семьи' },
+  { name: 'Aisha Henson', static: '378375', reason: 'Предательство семьи и союзных семей' },
+  { name: 'Griff Grex', static: '419399', reason: 'Введение в заблуждение руководства семьи' },
+  { name: 'Artem Stone', static: '480038', reason: 'Кража вещей в семье' },
+  { name: 'Artemchik Moretti', static: '458590', reason: 'Предательство союзной семьи' },
+  { name: 'Modest Velasco', static: '59114', reason: 'Предатель из Веласко' },
+  { name: 'Ozzi Velasco', static: '238023', reason: 'Предатель из Веласко' },
+  { name: 'Santiago Velasco', static: '433414', reason: 'Предатель из Веласко' },
+  { name: 'Rober Velasco', static: '502967', reason: 'Предатель из Веласко' }
+];
+
 const DEFAULT_PARTICIPANTS = [
   { name: 'Rayan Stone', rank: 10, static: '376117', status: 'Активен', bonus: 0, reason: '' },
   { name: 'Vitoha Stone', rank: 9, static: '398775', status: 'Активен', bonus: 0, reason: '' },
@@ -397,8 +417,8 @@ const DEFAULT_PARTICIPANTS = [
   { name: 'Kurt Goldenside', rank: 3, static: '70410', status: 'Твинк', bonus: 0, reason: '' },
   { name: 'Yuryk Goldenside', rank: 3, static: '154805', status: 'Твинк', bonus: 0, reason: '' }
 ];
-Object.keys(DEFAULT_BLACKLIST_REASONS).forEach(name => {
-  DEFAULT_PARTICIPANTS.push({ name, rank: 0, static: BLACKLIST_STATICS[name] || '', status: 'ЧС', bonus: 0, reason: DEFAULT_BLACKLIST_REASONS[name] });
+BLACKLIST_DATA.forEach(item => {
+  DEFAULT_PARTICIPANTS.push({ name: item.name, rank: 0, static: item.static, status: 'ЧС', bonus: 0, reason: item.reason });
 });
 
 const CONTRACTS = {
@@ -411,18 +431,29 @@ const CONTRACTS = {
   'Ателье': { openCost: 10000, totalNorm: 105, payPerItem: 1493.33, totalPay: 196000 }
 };
 
-const STORAGE_KEY = 'stone_family_v9';
-const BACKUP_STORAGE_KEY = 'stone_family_v9_recovery_backup';
+// ==========================================
+// СОСТОЯНИЕ
+// ==========================================
+const STORAGE_KEY = 'stone_family_v12';
+const BACKUP_STORAGE_KEY = 'stone_family_v12_recovery_backup';
 const DEFAULT_COLLAPSED = { 'Активен': false, 'Отпуск': false, 'Твинк': false, 'ЧС': false };
 const DEFAULT_SHARES = { 'Металлургия': 0.8, 'Товары': 0.8, 'Ателье': 0.8 };
+const DEFAULT_COEFFS = { 1: 0, 2: 0.5, 3: 0.75, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1 };
+
 let state = {
-  settings: { startDate: todayLocalDate(), shares: { ...DEFAULT_SHARES } },
-  participants: [], directions: [], history: [], collapsed: { ...DEFAULT_COLLAPSED }
+  settings: { startDate: getCurrentMonday(), shares: { ...DEFAULT_SHARES }, coeffs: { ...DEFAULT_COEFFS } },
+  participants: [], directions: [], history: [], collapsed: { ...DEFAULT_COLLAPSED },
+  uiCollapsed: {}
 };
 
-function todayLocalDate() {
+let confirmCallback = null;
+const $ = id => document.getElementById(id);
+
+function getCurrentMonday() {
   const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const day = d.getDay() || 7; 
+  if (day !== 1) d.setHours(-24 * (day - 1));
+  return toLocalDateString(d);
 }
 function parseLocalDate(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
@@ -431,30 +462,32 @@ function parseLocalDate(value) {
   if (d.getFullYear() !== Number(match[1]) || d.getMonth() !== Number(match[2])-1 || d.getDate() !== Number(match[3])) return new Date(NaN);
   return d;
 }
-function toLocalDateString(date) {
-  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
-}
+function toLocalDateString(date) { return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`; }
 function formatShortDate(date) { return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }); }
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
-}
-function finiteNumber(value, fallback = 0) {
-  const n = Number(value);
-  return Number.isFinite(n) ? n : fallback;
-}
+function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch])); }
+function finiteNumber(value, fallback = 0) { const n = Number(value); return Number.isFinite(n) ? n : fallback; }
 function cloneJson(value) { return JSON.parse(JSON.stringify(value)); }
 
 function normalizeState(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('Некорректная структура данных');
   const rawSettings = raw.settings && typeof raw.settings === 'object' ? raw.settings : {};
   const parsedStartDate = parseLocalDate(rawSettings.startDate);
-  const startDate = Number.isFinite(parsedStartDate.getTime()) ? rawSettings.startDate : todayLocalDate();
+  const startDate = Number.isFinite(parsedStartDate.getTime()) ? rawSettings.startDate : getCurrentMonday();
+  
   const rawShares = rawSettings.shares && typeof rawSettings.shares === 'object' ? rawSettings.shares : {};
   const shares = {};
   Object.keys(DEFAULT_SHARES).forEach(key => {
     const n = finiteNumber(rawShares[key], DEFAULT_SHARES[key]);
     shares[key] = n >= 0 && n <= 1 ? n : DEFAULT_SHARES[key];
   });
+  
+  const rawCoeffs = rawSettings.coeffs && typeof rawSettings.coeffs === 'object' ? rawSettings.coeffs : {};
+  const coeffs = {};
+  [1,2,3,4,5,6,7,8,9,10].forEach(r => {
+    const n = finiteNumber(rawCoeffs[r], DEFAULT_COEFFS[r]);
+    coeffs[r] = n >= 0 && n <= 1 ? n : DEFAULT_COEFFS[r];
+  });
+
   const participantsSource = Array.isArray(raw.participants) ? raw.participants : cloneJson(DEFAULT_PARTICIPANTS);
   const participants = participantsSource.filter(p => p && typeof p === 'object').map(p => ({
     ...p, name: String(p.name ?? ''), static: String(p.static ?? ''),
@@ -484,9 +517,10 @@ function normalizeState(raw) {
     return { ...d, id: dirId, days, participants: contributions };
   });
   return {
-    ...raw, settings: { ...rawSettings, startDate, shares }, participants, directions,
+    ...raw, settings: { ...rawSettings, startDate, shares, coeffs }, participants, directions,
     history: Array.isArray(raw.history) ? raw.history.filter(h => h && typeof h === 'object') : [],
-    collapsed: { ...DEFAULT_COLLAPSED, ...(raw.collapsed && typeof raw.collapsed === 'object' ? raw.collapsed : {}) }
+    collapsed: { ...DEFAULT_COLLAPSED, ...(raw.collapsed && typeof raw.collapsed === 'object' ? raw.collapsed : {}) },
+    uiCollapsed: raw.uiCollapsed && typeof raw.uiCollapsed === 'object' ? raw.uiCollapsed : {}
   };
 }
 
@@ -508,15 +542,26 @@ function load() {
     toast('Ошибка данных: загружен список по умолчанию');
   }
 }
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
-  catch (e) { console.error('Не удалось сохранить:', e); toast('Не удалось сохранить: проверьте память'); return false; }
+function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; } catch (e) { toast('Ошибка сохранения'); return false; } }
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200); }
+
+// Красивое окно подтверждения
+function showConfirm(title, text, btnText, callback) {
+  $('confirm-title').textContent = title;
+  $('confirm-text').textContent = text;
+  $('confirm-btn').textContent = btnText;
+  confirmCallback = callback;
+  $('confirm-modal').classList.add('show');
 }
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+function closeConfirmModal() {
+  $('confirm-modal').classList.remove('show');
+  confirmCallback = null;
 }
+$('confirm-btn').onclick = () => {
+  if (confirmCallback) confirmCallback();
+  closeConfirmModal();
+};
+
 function getRankColor(rank) {
   const r = Number(rank);
   if (r >= 10) return 'var(--r-gk)'; if (r === 9) return 'var(--r9)'; if (r === 8) return 'var(--r8)';
@@ -524,7 +569,10 @@ function getRankColor(rank) {
   if (r === 4) return 'var(--r4)'; if (r === 3) return 'var(--r3)'; if (r === 2) return 'var(--r2)';
   return '#888';
 }
-function rankCoeff(rank) { if (rank <= 1) return 0; if (rank === 2) return 0.5; if (rank === 3) return 0.75; return 1; }
+function rankCoeff(rank) { 
+  const r = Math.max(1, Math.min(10, Number(rank) || 1));
+  return state.settings.coeffs[r] !== undefined ? state.settings.coeffs[r] : DEFAULT_COEFFS[r]; 
+}
 function sortParticipants(a, b) {
   const rA = Number(a.rank) || 0, rB = Number(b.rank) || 0;
   if (rA !== rB) return rB - rA;
@@ -542,7 +590,7 @@ function checkContract(dirType, day, participants) {
     const m = config.types[day.metalType] || config.types['Олово'];
     norm = m.norm; isClosed = totalAmount >= norm;
     dayFund = isClosed ? m.pay * state.settings.shares[dirType] : 0;
-    infoText = `Норма: ${norm}. Макс: ${m.maxPerPerson}. Выплата: ${m.pay} (Фонд: ${dayFund})`;
+    infoText = `Норма: ${norm}. Выплата: ${m.pay} (Фонд: ${dayFund})`;
   } else if (dirType === 'Товары') {
     norm = config.totalNorm; isClosed = totalAmount >= norm;
     dayFund = isClosed ? config.pay * state.settings.shares[dirType] : 0;
@@ -557,16 +605,12 @@ function checkContract(dirType, day, participants) {
 
 function calcParticipantEarnings(p) {
   const earnings = { 'Металлургия': 0, 'Товары': 0, 'Ателье': 0 };
-  let extraFlight = 0;
-  let extraReturn = 0; // ВОЗВРАТ ЗАТРАТ
+  let extraFlight = 0, extraReturn = 0;
 
   state.directions.forEach(dir => {
     dir.days.forEach(day => {
-      // Возврат затрат ответственному (прибавляется к итогу без учета ранга)
-      if (day.responsible === p.name && Number(day.costs) > 0) {
-        extraReturn += Number(day.costs);
-      }
-
+      if (day.responsible === p.name && Number(day.costs) > 0) extraReturn += Number(day.costs);
+      
       const dirParticipants = dir.participants.filter(e => e.dayId === day.id);
       const { totalAmount, isClosed, dayFund } = checkContract(dir.type, day, dirParticipants);
 
@@ -594,13 +638,7 @@ function calcParticipantEarnings(p) {
   return { ...earnings, total, coeff, base, bonus, extraFlight, extraReturn, final };
 }
 
-function getPayouts() {
-  return state.participants
-    .map(p => ({ ...p, calc: calcParticipantEarnings(p) }))
-    .filter(p => p.calc.final > 0)
-    .sort(sortParticipants);
-}
-
+function getPayouts() { return state.participants.map(p => ({ ...p, calc: calcParticipantEarnings(p) })).filter(p => p.calc.final > 0).sort(sortParticipants); }
 function totalPremiumFund() { return state.participants.reduce((sum, p) => sum + calcParticipantEarnings(p).final, 0); }
 function totalProfit() {
   let sum = 0;
@@ -617,12 +655,53 @@ function totalProfit() {
   return sum;
 }
 
+// ==========================================
+// РЕНДЕР
+// ==========================================
+function renderDashboard() {
+  const profit = totalProfit(), fund = totalPremiumFund(), payouts = getPayouts();
+  $('d-profit').textContent = Math.round(profit).toLocaleString('ru-RU') + ' $';
+  $('d-fund').textContent = Math.round(fund).toLocaleString('ru-RU') + ' $';
+  $('d-balance').textContent = Math.round(profit - fund).toLocaleString('ru-RU') + ' $';
+  $('d-recipients').textContent = payouts.length;
+  
+  const tbody = $('payouts-body');
+  tbody.innerHTML = payouts.length === 0 ? '<tr><td colspan="4" class="empty">Пока никто не получает премию</td></tr>' :
+    payouts.map(p => {
+      const hasStatic = p.static && p.static.trim() !== '';
+      return `<tr>
+        <td style="text-align:center; ${!hasStatic ? 'color:var(--red);font-weight:bold;' : ''}">${hasStatic ? escapeHtml(p.static) : 'НЕТ СТАТИКА!'}</td>
+        <td style="text-align:left;"><span class="rank-dot" style="background:${getRankColor(p.rank)}"></span><strong>${escapeHtml(p.name)}</strong></td>
+        <td style="text-align:center;">${p.rank}</td><td style="text-align:center;" class="money">${Math.round(p.calc.final).toLocaleString('ru-RU')} $</td>
+      </tr>`;
+    }).join('');
+
+  const mobileBody = $('payouts-mobile');
+  mobileBody.innerHTML = payouts.length === 0 ? '<div class="empty">Пока никто не получает премию</div>' :
+    payouts.map(p => {
+      const hasStatic = p.static && p.static.trim() !== '';
+      return `
+        <div class="mobile-card">
+          <div class="row1">
+            <strong><span class="rank-dot" style="background:${getRankColor(p.rank)}"></span>${escapeHtml(p.name)}</strong>
+            <span class="money">${Math.round(p.calc.final).toLocaleString('ru-RU')} $</span>
+          </div>
+          <div class="row2">
+            <span>Ранг: ${p.rank}</span>
+            <span style="${!hasStatic ? 'color:var(--red);font-weight:bold;' : ''}">${hasStatic ? 'Ст: ' + escapeHtml(p.static) : 'НЕТ СТАТИКА!'}</span>
+          </div>
+        </div>`;
+    }).join('');
+  
+  $('export-preview').textContent = generateExportText();
+}
+
 function generateExportText() {
   const payouts = getPayouts();
   const start = parseLocalDate(state.settings.startDate);
   const end = new Date(start); end.setDate(end.getDate() + 6);
   const f = d => `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}`;
-  const dateStr = `${f(start)} по ${f(end)}`;
+  const dateStr = `с ${f(start)} по ${f(end)}`;
   
   let lines = ['staticId;amount;comment'];
   payouts.forEach(p => {
@@ -633,103 +712,10 @@ function generateExportText() {
   return lines.join('\n');
 }
 
-function copyExport() {
-  const text = generateExportText();
-  if (text.split('\n').length <= 1) { toast('Нет данных для выдачи!'); return; }
-  const fallbackCopy = () => {
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    let copied = false;
-    try { copied = document.execCommand('copy'); } catch (e) { console.error(e); }
-    document.body.removeChild(ta);
-    toast(copied ? 'Скопировано!' : 'Не удалось скопировать — скачайте TXT');
-  };
-  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => toast('Скопировано в буфер!')).catch(fallbackCopy);
-  else fallbackCopy();
-}
-function downloadExport() {
-  const text = generateExportText();
-  if (text.split('\n').length <= 1) { toast('Нет данных для выдачи!'); return; }
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = `premiums_${state.settings.startDate}.txt`; a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Файл скачан');
-}
-
-function renderDashboard() {
-  const profit = totalProfit(), fund = totalPremiumFund(), payouts = getPayouts();
-  document.getElementById('d-profit').textContent = profit.toFixed(2);
-  document.getElementById('d-fund').textContent = fund.toFixed(2);
-  document.getElementById('d-balance').textContent = (profit - fund).toFixed(2);
-  document.getElementById('d-recipients').textContent = payouts.length;
-  
-  const tbody = document.getElementById('payouts-body');
-  tbody.innerHTML = payouts.length === 0 ? '<tr><td colspan="4" class="empty">Пока никто не получает премию</td></tr>' :
-    payouts.map(p => {
-      const hasStatic = p.static && p.static.trim() !== '';
-      return `<tr>
-        <td style="${!hasStatic ? 'color:var(--red);font-weight:bold;' : ''}">${hasStatic ? escapeHtml(p.static) : 'НЕТ СТАТИКА!'}</td>
-        <td><span class="rank-dot" style="background:${getRankColor(p.rank)}"></span><strong>${escapeHtml(p.name)}</strong></td>
-        <td>${p.rank}</td><td class="money">${p.calc.final.toFixed(2)}</td>
-      </tr>`;
-    }).join('');
-
-  const mobileBody = document.getElementById('payouts-mobile');
-  mobileBody.innerHTML = payouts.length === 0 ? '<div class="empty">Пока никто не получает премию</div>' :
-    payouts.map(p => {
-      const hasStatic = p.static && p.static.trim() !== '';
-      return `
-        <div class="mobile-card">
-          <div class="row1">
-            <strong><span class="rank-dot" style="background:${getRankColor(p.rank)}"></span>${escapeHtml(p.name)}</strong>
-            <span class="money">${p.calc.final.toFixed(0)}</span>
-          </div>
-          <div class="row2">
-            <span>Ранг: ${p.rank}</span>
-            <span style="${!hasStatic ? 'color:var(--red);font-weight:bold;' : ''}">${hasStatic ? 'Ст: ' + escapeHtml(p.static) : 'НЕТ СТАТИКА!'}</span>
-          </div>
-        </div>`;
-    }).join('');
-  
-  document.getElementById('export-preview').textContent = generateExportText();
-}
-
-function renderHistory() {
-  const container = document.getElementById('week-history');
-  if (!container) return;
-  const entries = [...(state.history || [])].reverse();
-  if (!entries.length) {
-    container.innerHTML = '<p class="empty">Архив пока пуст. Завершённые недели будут сохраняться при переходе на новую.</p>';
-    return;
-  }
-  container.innerHTML = entries.map(item => {
-    const start = parseLocalDate(item.startDate);
-    const end = parseLocalDate(item.endDate);
-    const label = start.toString() !== 'Invalid Date' && end.toString() !== 'Invalid Date'
-      ? `${formatShortDate(start)} — ${formatShortDate(end)}` : escapeHtml(item.startDate || 'Неделя');
-    return `<div class="mobile-card" style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;">
-      <div style="flex:1; min-width:150px;">
-        <strong style="color:var(--orange-light);">${label}</strong><br>
-        <span style="font-size:12px; color:var(--text-muted);">Контракты: ${finiteNumber(item.grossProfit).toLocaleString('ru-RU')} | Выплаты: ${finiteNumber(item.paidFund).toLocaleString('ru-RU')}</span>
-      </div>
-      <button class="btn btn-outline" style="padding:6px 10px; min-height:auto; font-size:12px;" onclick="downloadArchiveWeek('${item.id}')">📥 JSON</button>
-    </div>`;
-  }).join('');
-}
-
-function downloadArchiveWeek(id) {
-  const item = state.history.find(h => h.id === id);
-  if (!item) { toast('Запись архива не найдена'); return; }
-  const blob = new Blob([JSON.stringify(item, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = `archive_${item.startDate}.json`; a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Архив недели скачан');
-}
-
 function renderParticipants() {
-  const search = (document.getElementById('search-participant')?.value || '').toLowerCase();
-  const container = document.getElementById('participants-container');
+  const search = ($('search-participant')?.value || '').toLowerCase().trim();
+  const searchType = $('search-type')?.value || 'name';
+  const container = $('participants-container');
   if (!container) return;
 
   const statuses = [
@@ -740,7 +726,15 @@ function renderParticipants() {
   ];
 
   container.innerHTML = statuses.map(st => {
-    let filtered = state.participants.filter(p => p.status === st.key && (!search || (p.name || '').toLowerCase().includes(search)));
+    let filtered = state.participants.filter(p => {
+      if (p.status !== st.key) return false;
+      if (!search) return true;
+      if (searchType === 'name') return (p.name || '').toLowerCase().includes(search);
+      if (searchType === 'static') return String(p.static || '').includes(search);
+      if (searchType === 'rank') return String(p.rank || '') === search;
+      return true;
+    });
+    
     if (st.key !== 'ЧС') filtered.sort(sortParticipants);
     else filtered.sort((a, b) => (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase()));
     if (filtered.length === 0) return '';
@@ -758,8 +752,12 @@ function renderParticipants() {
             <table style="margin:0;">
               <thead>
                 <tr>
-                  <th>Имя</th>${!isBlack ? '<th>Ранг</th>' : ''}<th>Статик</th>${isBlack ? '<th>Причина</th>' : ''}<th>Статус</th>
-                  ${!isSimple && !isBlack ? '<th>Металл.</th><th>Товары</th><th>Ателье</th><th>Всего</th><th>Коэф.</th><th>Базовая</th><th>Надбавка</th><th>Итог</th>' : ''}
+                  <th style="text-align:left;">Имя</th>
+                  ${!isBlack ? '<th style="text-align:center;">Ранг</th>' : ''}
+                  <th style="text-align:center;">Статик</th>
+                  ${isBlack ? '<th style="text-align:left;">Причина</th>' : ''}
+                  <th style="text-align:center;">Статус</th>
+                  ${!isSimple && !isBlack ? '<th style="text-align:center;">Металл.</th><th style="text-align:center;">Товары</th><th style="text-align:center;">Ателье</th><th style="text-align:center;">Всего</th><th style="text-align:center;">Коэф.</th><th style="text-align:center;">Базовая</th><th style="text-align:center;">Надбавка</th><th style="text-align:center;">Итог</th>' : ''}
                   <th></th>
                 </tr>
               </thead>
@@ -768,18 +766,18 @@ function renderParticipants() {
                   const c = calcParticipantEarnings(p), idx = state.participants.indexOf(p);
                   return `
                     <tr>
-                      <td>${!isBlack ? `<span class="rank-dot" style="background:${getRankColor(p.rank)}"></span>` : ''}<input value="${escapeHtml(p.name || '')}" onchange="updateParticipant(${idx}, 'name', this.value)" style="width:140px;"></td>
-                      ${!isBlack ? `<td><input type="number" value="${p.rank ?? 1}" min="0" max="10" step="1" onchange="updateParticipant(${idx}, 'rank', this.value)" style="width:60px;"></td>` : ''}
-                      <td><input value="${escapeHtml(p.static || '')}" onchange="updateParticipant(${idx}, 'static', this.value)" style="width:100px;" placeholder="Статик..."></td>
-                      ${isBlack ? `<td><input value="${escapeHtml(p.reason || '')}" onchange="updateParticipant(${idx}, 'reason', this.value)" style="width:200px;" placeholder="Причина..."></td>` : ''}
-                      <td><select onchange="updateParticipant(${idx}, 'status', this.value)" style="width:110px;">${['Активен','Отпуск','Твинк','ЧС'].map(s => `<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
+                      <td style="text-align:left;">${!isBlack ? `<span class="rank-dot" style="background:${getRankColor(p.rank)}"></span>` : ''}<input value="${escapeHtml(p.name || '')}" onchange="updateParticipant(${idx}, 'name', this.value)" style="width:140px; text-align:left;"></td>
+                      ${!isBlack ? `<td style="text-align:center;"><input type="number" value="${p.rank ?? 1}" min="0" max="10" step="1" onchange="updateParticipant(${idx}, 'rank', this.value)" style="width:60px; text-align:center;"></td>` : ''}
+                      <td style="text-align:center;"><input value="${escapeHtml(p.static || '')}" onchange="updateParticipant(${idx}, 'static', this.value)" style="width:100px; text-align:center;" placeholder="Статик..."></td>
+                      ${isBlack ? `<td style="text-align:left;"><input value="${escapeHtml(p.reason || '')}" onchange="updateParticipant(${idx}, 'reason', this.value)" style="width:200px; text-align:left;" placeholder="Причина..."></td>` : ''}
+                      <td style="text-align:center;"><select onchange="updateParticipant(${idx}, 'status', this.value)" style="width:110px; text-align:center;">${['Активен','Отпуск','Твинк','ЧС'].map(s => `<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
                       ${!isSimple && !isBlack ? `
-                        <td>${c['Металлургия'].toFixed(0)}</td><td>${c['Товары'].toFixed(0)}</td><td>${c['Ателье'].toFixed(0)}</td>
-                        <td>${c.total.toFixed(0)}</td><td>${c.coeff}</td><td>${c.base.toFixed(0)}</td>
-                        <td><input type="number" value="${p.bonus || 0}" onchange="updateParticipant(${idx}, 'bonus', this.value)" style="width:80px;"></td>
-                        <td class="money">${c.final.toFixed(0)}</td>
+                        <td style="text-align:center;">${c['Металлургия'].toFixed(0)}</td><td style="text-align:center;">${c['Товары'].toFixed(0)}</td><td style="text-align:center;">${c['Ателье'].toFixed(0)}</td>
+                        <td style="text-align:center;">${c.total.toFixed(0)}</td><td style="text-align:center;">${c.coeff}</td><td style="text-align:center;">${c.base.toFixed(0)}</td>
+                        <td style="text-align:center;"><input type="number" value="${p.bonus || 0}" onchange="updateParticipant(${idx}, 'bonus', this.value)" style="width:80px; text-align:center;"></td>
+                        <td style="text-align:center;" class="money">${Math.round(c.final).toLocaleString('ru-RU')} $</td>
                       ` : ''}
-                      <td class="row-actions"><button onclick="removeParticipant(${idx})">✕</button></td>
+                      <td class="row-actions" style="text-align:center;"><button onclick="removeParticipant(${idx})">✕</button></td>
                     </tr>
                   `;
                 }).join('')}
@@ -795,21 +793,21 @@ function renderParticipants() {
                   <div class="row1">
                     <div style="display:flex; align-items:center; gap:5px;">
                       ${!isBlack ? `<span class="rank-dot" style="background:${getRankColor(p.rank)}"></span>` : ''}
-                      <input value="${escapeHtml(p.name || '')}" onchange="updateParticipant(${idx}, 'name', this.value)" style="width:120px; font-size:14px;">
+                      <input value="${escapeHtml(p.name || '')}" onchange="updateParticipant(${idx}, 'name', this.value)" style="width:120px; font-size:14px; text-align:left;">
                     </div>
                     <button class="btn btn-danger" style="padding:4px 8px; min-height:auto; font-size:12px;" onclick="removeParticipant(${idx})">✕</button>
                   </div>
                   
                   <div class="row2">
-                    ${!isBlack ? `<div><label style="font-size:10px;color:var(--text-muted);">Ранг</label><input type="number" value="${p.rank ?? 1}" min="0" max="10" step="1" onchange="updateParticipant(${idx}, 'rank', this.value)" style="font-size:14px;"></div>` : ''}
-                    <div><label style="font-size:10px;color:var(--text-muted);">Статик</label><input value="${escapeHtml(p.static || '')}" onchange="updateParticipant(${idx}, 'static', this.value)" placeholder="Статик..."></div>
+                    ${!isBlack ? `<div><label style="font-size:10px;color:var(--text-muted);">Ранг</label><input type="number" value="${p.rank ?? 1}" min="0" max="10" step="1" onchange="updateParticipant(${idx}, 'rank', this.value)" style="font-size:14px; text-align:center;"></div>` : ''}
+                    <div><label style="font-size:10px;color:var(--text-muted);">Статик</label><input value="${escapeHtml(p.static || '')}" onchange="updateParticipant(${idx}, 'static', this.value)" style="text-align:center;" placeholder="Статик..."></div>
                     <div><label style="font-size:10px;color:var(--text-muted);">Статус</label><select onchange="updateParticipant(${idx}, 'status', this.value)">${['Активен','Отпуск','Твинк','ЧС'].map(s => `<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
                   </div>
 
                   ${isBlack ? `<div style="margin-top:5px;"><label style="font-size:10px;color:var(--text-muted);">Причина</label><input value="${escapeHtml(p.reason || '')}" onchange="updateParticipant(${idx}, 'reason', this.value)" placeholder="Причина..."></div>` : ''}
 
                   ${!isSimple && !isBlack ? `
-                  <div style="font-size:12px; margin-top:5px; color:var(--text-muted); display:grid; grid-template-columns:1fr 1fr; gap:5px;">
+                  <div style="font-size:12px; margin-top:5px; color:var(--text-muted); display:grid; grid-template-columns:1fr 1fr; gap:5px; text-align:left;">
                     <span>Металл: <b style="color:var(--text);">${c['Металлургия'].toFixed(0)}</b></span>
                     <span>Товары: <b style="color:var(--text);">${c['Товары'].toFixed(0)}</b></span>
                     <span>Ателье: <b style="color:var(--text);">${c['Ателье'].toFixed(0)}</b></span>
@@ -818,16 +816,15 @@ function renderParticipants() {
                   <div class="row3">
                     <div style="display:flex; align-items:center; gap:5px;">
                       <label style="font-size:10px;color:var(--text-muted);">Надбавка</label>
-                      <input type="number" value="${p.bonus || 0}" onchange="updateParticipant(${idx}, 'bonus', this.value)" style="width:80px; font-size:14px;">
+                      <input type="number" value="${p.bonus || 0}" onchange="updateParticipant(${idx}, 'bonus', this.value)" style="width:80px; font-size:14px; text-align:center;">
                     </div>
-                    <span class="money">${c.final.toFixed(0)}</span>
+                    <span class="money">${Math.round(c.final).toLocaleString('ru-RU')} $</span>
                   </div>
                   ` : ''}
                 </div>
               `;
             }).join('')}
           </div>
-
         </div>
       </div>
     `;
@@ -835,7 +832,7 @@ function renderParticipants() {
 }
 
 function renderDirections() {
-  const container = document.getElementById('directions-container');
+  const container = $('directions-container');
   if (!container) return;
   const types = [
     { key: 'Металлургия', icon: '⛏️', cls: 'metallurgy' },
@@ -859,37 +856,58 @@ function renderDirections() {
           ${dir.days.map((d, dayIdx) => {
             const participants = dir.participants.filter(e => e.dayId === d.id);
             const { totalAmount, isClosed, infoText, norm } = checkContract(t.key, d, participants);
-            
+            const isCollapsed = state.uiCollapsed[d.id] ? 'collapsed' : '';
+            const normPerPerson = t.key === 'Металлургия' ? config.types[d.metalType].maxPerPerson : 
+                                  (t.key === 'Товары' ? config.partAmount : 
+                                  (t.key === 'Ателье' ? config.totalNorm : 0));
+
             return `
-              <div class="day-card ${t.cls}">
-                <h3>${escapeHtml(d.name)} <span>${escapeHtml(d.date)}</span></h3>
-                <div class="info-badge">${infoText}</div>
-                <div class="form-row" style="grid-template-columns:1fr 1fr;">
-                  <div><label>Ответственный</label><select onchange="updateDay(${dirIdx}, ${dayIdx}, 'responsible', this.value)"><option value="">—</option>${activeParticipants.map(p => `<option ${d.responsible===p.name?'selected':''}>${escapeHtml(p.name)}</option>`).join('')}</select></div>
-                  <div><label>Затраты (возврат ответственному)</label><input type="number" min="0" step="any" value="${escapeHtml(d.costs || 0)}" onchange="updateDay(${dirIdx}, ${dayIdx}, 'costs', this.value)"></div>
-                </div>
-                ${t.key === 'Металлургия' ? `<div class="form-row" style="grid-template-columns:1fr;"><div><label>Тип металла</label><select onchange="updateDay(${dirIdx}, ${dayIdx}, 'metalType', this.value)">${Object.keys(config.types).map(m => `<option ${d.metalType===m?'selected':''}>${m}</option>`).join('')}</select></div></div>` : ''}
-                <div class="contract-status ${isClosed ? 'contract-closed' : 'contract-open'}">${isClosed ? '✅ Контракт закрыт' : '⏳ Не закрыт (сдано: ' + totalAmount + ' из ' + norm + ')'}</div>
-                <div class="divider" style="margin:10px 0;"></div>
-                <div style="font-size:13px; color:var(--text-muted); margin-bottom:5px;">Участники дня:</div>
-                <button class="btn btn-outline" style="padding:4px 8px; font-size:12px; margin-bottom:8px; min-height:auto;" onclick="addContribution(${dirIdx}, ${dayIdx})">+ Добавить</button>
-                <div style="max-height:200px; overflow-y:auto;">
-                  <table>
-                    <thead><tr><th>Имя</th><th>Кол-во</th>${t.key === 'Товары' ? '<th title="Грузил самолёт">✈️</th>' : ''}<th></th></tr></thead>
-                    <tbody>
-                      ${participants.map(e => {
-                        const ei = dir.participants.indexOf(e);
-                        return `
-                          <tr>
-                            <td style="padding:2px;"><select onchange="updateContribution(${dirIdx}, ${ei}, 'name', this.value)" style="font-size:13px;"><option value="">—</option>${activeParticipants.map(p => `<option ${e.name===p.name?'selected':''}>${escapeHtml(p.name)}</option>`).join('')}</select></td>
-                            <td style="padding:2px; width:80px;"><input type="number" min="0" step="any" value="${escapeHtml(e.amount || 0)}" onchange="updateContribution(${dirIdx}, ${ei}, 'amount', this.value)" style="font-size:13px;"></td>
-                            ${t.key === 'Товары' ? `<td style="padding:2px; width:40px; text-align:center;"><input type="checkbox" title="Грузил самолёт" ${e.flight ? 'checked' : ''} onchange="updateContribution(${dirIdx}, ${ei}, 'flight', this.checked)"></td>` : ''}
-                            <td style="padding:2px; width:30px;" class="row-actions"><button onclick="removeContribution(${dirIdx}, ${ei})" style="font-size:14px;">✕</button></td>
-                          </tr>
-                        `;
-                      }).join('')}
-                    </tbody>
-                  </table>
+              <div class="day-card ${t.cls} ${isCollapsed}" id="day-${d.id}">
+                <h3 onclick="toggleDay('${d.id}')">
+                  <div>${escapeHtml(d.name)} <span style="font-weight:normal; font-size:13px; margin-left:10px; color:var(--text-muted);">${escapeHtml(d.date)}</span></div>
+                  <div style="display:flex; align-items:center;">
+                    <span class="status-mini ${isClosed ? 'closed' : 'open'}">${isClosed ? 'Закрыт' : totalAmount + '/' + norm}</span>
+                    <span>${isCollapsed ? '▼' : '▲'}</span>
+                  </div>
+                </h3>
+                
+                <div class="collapse-content">
+                  ${t.key === 'Металлургия' ? `<div class="form-row" style="grid-template-columns:1fr; margin-bottom:5px;"><div><label>Тип металла</label><select onchange="updateDay(${dirIdx}, ${dayIdx}, 'metalType', this.value)">${Object.keys(config.types).map(m => `<option ${d.metalType===m?'selected':''}>${m}</option>`).join('')}</select></div></div>` : ''}
+                  
+                  <div class="info-badge">${infoText}</div>
+                  
+                  <div class="form-row" style="grid-template-columns:1fr 1fr;">
+                    <div><label>Ответственный</label>
+                      <select onchange="updateDay(${dirIdx}, ${dayIdx}, 'responsible', this.value)">
+                        <option value="">—</option>
+                        ${activeParticipants.map(p => `<option value="${escapeHtml(p.name)}" ${d.responsible===p.name?'selected':''}>${escapeHtml(p.name)} (${escapeHtml(p.static)})</option>`).join('')}
+                      </select>
+                    </div>
+                    <div><label>Затраты (возврат)</label><input type="number" min="0" step="any" value="${escapeHtml(d.costs || 0)}" onchange="updateDay(${dirIdx}, ${dayIdx}, 'costs', this.value)"></div>
+                  </div>
+                  
+                  <div class="divider" style="margin:10px 0;"></div>
+                  <div style="font-size:13px; color:var(--text-muted); margin-bottom:5px;">Участники дня:</div>
+                  <button class="btn btn-outline" style="padding:4px 8px; font-size:12px; margin-bottom:8px; min-height:auto;" onclick="addContribution(${dirIdx}, ${dayIdx}, ${normPerPerson})">+ Добавить</button>
+                  
+                  <div style="max-height:200px; overflow-y:auto;">
+                    <table>
+                      <thead><tr><th style="text-align:center;">Имя</th><th style="text-align:center;">Кол-во</th>${t.key === 'Товары' ? '<th title="Грузил самолёт" style="text-align:center;">✈️</th>' : ''}<th></th></tr></thead>
+                      <tbody>
+                        ${participants.map(e => {
+                          const ei = dir.participants.indexOf(e);
+                          return `
+                            <tr>
+                              <td style="padding:2px;"><select onchange="updateContribution(${dirIdx}, ${ei}, 'name', this.value)" style="font-size:13px;"><option value="">—</option>${activeParticipants.map(p => `<option value="${p.name}" ${e.name===p.name?'selected':''}>${escapeHtml(p.name)} (${escapeHtml(p.static)})</option>`).join('')}</select></td>
+                              <td style="padding:2px; width:80px;"><input type="number" min="0" step="any" value="${escapeHtml(e.amount || 0)}" onchange="updateContribution(${dirIdx}, ${ei}, 'amount', this.value)" style="font-size:13px; text-align:center;"></td>
+                              ${t.key === 'Товары' ? `<td style="padding:2px; width:40px; text-align:center;"><input type="checkbox" title="Грузил самолёт" ${e.flight ? 'checked' : ''} onchange="updateContribution(${dirIdx}, ${ei}, 'flight', this.checked)"></td>` : ''}
+                              <td style="padding:2px; width:30px;" class="row-actions"><button onclick="removeContribution(${dirIdx}, ${ei})" style="font-size:14px;">✕</button></td>
+                            </tr>
+                          `;
+                        }).join('')}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             `;
@@ -900,27 +918,27 @@ function renderDirections() {
   }).join('');
 }
 
-function toggleStatus(key) { state.collapsed[key] = !state.collapsed[key]; save(); renderParticipants(); }
-function openAddModal() {
-  document.getElementById('m-name').value = ''; document.getElementById('m-static').value = '';
-  document.getElementById('m-rank').value = 1; document.getElementById('m-status').value = 'Активен';
-  document.getElementById('m-reason').value = ''; toggleReasonField();
-  document.getElementById('add-modal').classList.add('show');
+// ==========================================
+// ЛОГИКА УПРАВЛЕНИЯ
+// ==========================================
+function toggleDay(dayId) {
+  if (state.uiCollapsed[dayId]) delete state.uiCollapsed[dayId];
+  else state.uiCollapsed[dayId] = true;
+  save();
+  renderDirections();
 }
-function closeAddModal() { document.getElementById('add-modal').classList.remove('show'); }
-function toggleReasonField() { document.getElementById('m-reason-wrap').style.display = document.getElementById('m-status').value === 'ЧС' ? 'block' : 'none'; }
+
+function toggleStatus(key) { state.collapsed[key] = !state.collapsed[key]; save(); renderParticipants(); }
+function openAddModal() { $('m-name').value = ''; $('m-static').value = ''; $('m-rank').value = 1; $('m-status').value = 'Активен'; $('m-reason').value = ''; toggleReasonField(); $('add-modal').classList.add('show'); }
+function closeAddModal() { $('add-modal').classList.remove('show'); }
+function toggleReasonField() { $('m-reason-wrap').style.display = $('m-status').value === 'ЧС' ? 'block' : 'none'; }
 function saveNewParticipant() {
-  const name = document.getElementById('m-name').value.trim();
-  const staticId = document.getElementById('m-static').value.trim();
-  const rank = Number(document.getElementById('m-rank').value);
-  if (!name) { toast('Введите имя!'); return; }
-  if (state.participants.some(p => p.name.toLowerCase() === name.toLowerCase())) { toast('Участник с таким именем уже есть'); return; }
-  if (!/^\d+$/.test(staticId)) { toast('Статик должен содержать только цифры'); return; }
-  if (!Number.isInteger(rank) || rank < 0 || rank > 10) { toast('Ранг должен быть от 0 до 10'); return; }
-  state.participants.push({ name, static: staticId, rank,
-    status: document.getElementById('m-status').value,
-    reason: document.getElementById('m-reason').value.trim(), bonus: 0
-  });
+  const name = $('m-name').value.trim(), staticId = $('m-static').value.trim(), rank = Number($('m-rank').value);
+  if (!name) return toast('Введите имя!');
+  if (state.participants.some(p => p.name.toLowerCase() === name.toLowerCase())) return toast('Участник с таким именем уже есть');
+  if (!/^\d+$/.test(staticId)) return toast('Статик должен содержать только цифры');
+  if (!Number.isInteger(rank) || rank < 0 || rank > 10) return toast('Ранг должен быть от 0 до 10');
+  state.participants.push({ name, static: staticId, rank, status: $('m-status').value, reason: $('m-reason').value.trim(), bonus: 0 });
   save(); closeAddModal(); refreshAll(); toast('Участник добавлен');
 }
 function updateParticipant(idx, field, value) {
@@ -928,26 +946,18 @@ function updateParticipant(idx, field, value) {
   if (!participant) return;
   if (field === 'name') {
     value = String(value).trim();
-    if (!value) { toast('Имя не может быть пустым'); refreshAll(); return; }
-    if (state.participants.some((p, i) => i !== idx && p.name.toLowerCase() === value.toLowerCase())) { toast('Участник с таким именем уже есть'); refreshAll(); return; }
+    if (!value) return refreshAll();
+    if (state.participants.some((p, i) => i !== idx && p.name.toLowerCase() === value.toLowerCase())) { toast('Имя занято'); return refreshAll(); }
     const previousName = participant.name;
     state.directions.forEach(dir => {
       dir.days.forEach(day => { if (day.responsible === previousName) day.responsible = value; });
       dir.participants.forEach(entry => { if (entry.name === previousName) entry.name = value; });
     });
   } else if (field === 'rank') {
-    const n = Number(value);
-    if (!Number.isInteger(n) || n < 0 || n > 10) { toast('Ранг должен быть от 0 до 10'); refreshAll(); return; }
-    value = n;
-  } else if (field === 'bonus') {
-    value = Number(value);
-    if (!Number.isFinite(value)) { toast('Введите корректную надбавку'); refreshAll(); return; }
-  } else if (field === 'static') {
-    value = String(value).trim();
-    if (value && !/^\d+$/.test(value)) { toast('Статик должен содержать только цифры'); refreshAll(); return; }
-  } else if (field === 'status' && !['Активен','Отпуск','Твинк','ЧС'].includes(value)) {
-    toast('Неизвестный статус'); refreshAll(); return;
-  }
+    const n = Number(value); if (!Number.isInteger(n) || n < 0 || n > 10) return refreshAll(); value = n;
+  } else if (field === 'bonus') { value = Number(value); if (!Number.isFinite(value)) return refreshAll(); }
+  else if (field === 'static') { value = String(value).trim(); if (value && !/^\d+$/.test(value)) return refreshAll(); }
+  
   participant[field] = value;
   save(); refreshAll();
 }
@@ -955,19 +965,22 @@ function removeParticipant(idx) {
   const participant = state.participants[idx];
   if (!participant) return;
   const hasRecords = state.directions.some(dir => dir.participants.some(e => e.name === participant.name) || dir.days.some(day => day.responsible === participant.name));
-  const message = hasRecords
-    ? `У ${participant.name} есть записи в контрактах. Удаление также удалит его вклад из текущих контрактов и может изменить их статус. Продолжить?`
-    : `Удалить ${participant.name}?`;
-  if (!confirm(message)) return;
-  state.directions.forEach(dir => {
-    dir.participants = dir.participants.filter(e => e.name !== participant.name);
-    dir.days.forEach(day => { if (day.responsible === participant.name) day.responsible = ''; });
-  });
-  state.participants.splice(idx, 1); save(); refreshAll();
+  showConfirm(
+    "Удалить участника?", 
+    hasRecords ? `У ${participant.name} есть записи в контрактах. Удаление также удалит его вклад и может изменить статус контрактов. Продолжить?` : `Вы уверены, что хотите удалить ${participant.name}?`,
+    "Удалить",
+    () => {
+      state.directions.forEach(dir => {
+        dir.participants = dir.participants.filter(e => e.name !== participant.name);
+        dir.days.forEach(day => { if (day.responsible === participant.name) day.responsible = ''; });
+      });
+      state.participants.splice(idx, 1); save(); refreshAll();
+    }
+  );
 }
 
 function addDirectionBlock(type) {
-  if (state.directions.some(d => d.type === type)) { toast('Это направление уже добавлено!'); return; }
+  if (state.directions.some(d => d.type === type)) return toast('Это направление уже добавлено!');
   const dir = { id: Date.now(), type, days: [], participants: [] };
   const dayNames = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   dir.days = dayNames.map((n, i) => {
@@ -976,62 +989,83 @@ function addDirectionBlock(type) {
   });
   state.directions.push(dir); save(); renderDirections();
 }
-function removeDirection(di) { if (!confirm('Удалить направление?')) return; state.directions.splice(di, 1); save(); refreshAll(); }
+function removeDirection(di) { 
+  showConfirm("Удалить направление?", "Все записи в этом направлении будут удалены.", "Удалить", () => {
+    state.directions.splice(di, 1); save(); refreshAll();
+  });
+}
 function updateDay(di, dayIdx, field, value) {
   const day = state.directions[di]?.days?.[dayIdx];
   if (!day) return;
-  if (field === 'costs') {
-    value = Number(value);
-    if (!Number.isFinite(value) || value < 0) { toast('Затраты должны быть неотрицательным числом'); refreshAll(); return; }
+  if (field === 'costs') { value = Number(value); if (!Number.isFinite(value) || value < 0) return; }
+  
+  if (field === 'metalType') {
+    const newMax = CONTRACTS['Металлургия'].types[value].maxPerPerson;
+    const dayId = day.id;
+    state.directions[di].participants.forEach(e => {
+      if (e.dayId === dayId) e.amount = newMax;
+    });
   }
+
   day[field] = value; save(); refreshAll();
 }
-function addContribution(di, dayIdx) {
+function addContribution(di, dayIdx, defaultAmount = 0) {
   const day = state.directions[di]?.days?.[dayIdx];
   if (!day) return;
-  state.directions[di].participants.push({ dayId: String(day.id), name: '', amount: 0, flight: false });
+  state.directions[di].participants.push({ dayId: String(day.id), name: '', amount: defaultAmount, flight: false });
   save(); renderDirections();
 }
 function updateContribution(di, ei, field, value) {
   const entry = state.directions[di]?.participants?.[ei];
   if (!entry) return;
-  if (field === 'amount') {
-    value = Number(value);
-    if (!Number.isFinite(value) || value < 0) { toast('Количество должно быть неотрицательным числом'); refreshAll(); return; }
-  }
+  if (field === 'amount') { value = Number(value); if (!Number.isFinite(value) || value < 0) return; }
   entry[field] = value; save(); refreshAll();
 }
 function removeContribution(di, ei) { state.directions[di].participants.splice(ei, 1); save(); refreshAll(); }
 
 function renderSettings() {
-  document.getElementById('s-start-date').value = state.settings.startDate;
+  $('s-start-date').value = state.settings.startDate;
   const end = parseLocalDate(state.settings.startDate); end.setDate(end.getDate() + 6);
-  document.getElementById('s-end-date').value = end.toLocaleDateString('ru-RU');
-  document.getElementById('s-metall').value = state.settings.shares['Металлургия'];
-  document.getElementById('s-goods').value = state.settings.shares['Товары'];
-  document.getElementById('s-atelier').value = state.settings.shares['Ателье'];
-  document.getElementById('header-week').textContent = state.settings.startDate;
+  $('s-end-date').value = end.toLocaleDateString('ru-RU');
+  $('s-metall').value = state.settings.shares['Металлургия'];
+  $('s-goods').value = state.settings.shares['Товары'];
+  $('s-atelier').value = state.settings.shares['Ателье'];
+  $('header-week').textContent = state.settings.startDate;
+  
+  const coeffBody = $('rank-coeffs-body');
+  coeffBody.innerHTML = [10,9,8,7,6,5,4,3,2,1].map(r => `
+    <div class="coeff-item">
+      <label>Ранг ${r}</label>
+      <input type="number" id="coeff-${r}" value="${state.settings.coeffs[r]}" min="0" max="1" step="0.05">
+    </div>
+  `).join('');
 }
 function saveSettings() {
-  const startDate = document.getElementById('s-start-date').value;
-  if (!Number.isFinite(parseLocalDate(startDate).getTime())) { toast('Укажите корректную дату начала недели'); return; }
-  const fields = {
-    'Металлургия': document.getElementById('s-metall').value,
-    'Товары': document.getElementById('s-goods').value,
-    'Ателье': document.getElementById('s-atelier').value
-  };
+  const startDate = $('s-start-date').value;
+  if (!Number.isFinite(parseLocalDate(startDate).getTime())) return toast('Укажите корректную дату');
+  const fields = { 'Металлургия': $('s-metall').value, 'Товары': $('s-goods').value, 'Ателье': $('s-atelier').value };
   const nextShares = {};
+  
   for (const [key, raw] of Object.entries(fields)) {
     const n = Number(raw);
-    if (String(raw).trim() === '' || !Number.isFinite(n) || n < 0 || n > 1) { toast('Доля фонда должна быть от 0 до 1 (0.8 = 80%)'); renderSettings(); return; }
+    if (String(raw).trim() === '' || !Number.isFinite(n) || n < 0 || n > 1) return toast('Доля должна быть от 0 до 1');
+    if (n >= 1) return toast('Казна останется с 0. Семья не должна работать в ноль.');
     nextShares[key] = n;
   }
+  
   state.settings.startDate = startDate;
   state.settings.shares = nextShares;
   state.directions.forEach(dir => dir.days.forEach((day, i) => {
     const date = parseLocalDate(startDate); date.setDate(date.getDate() + i); day.date = formatShortDate(date);
   }));
   save(); refreshAll();
+}
+function saveCoeffs() {
+  [1,2,3,4,5,6,7,8,9,10].forEach(r => {
+    const val = Number($('coeff-' + r).value);
+    if (Number.isFinite(val) && val >= 0 && val <= 1) state.settings.coeffs[r] = val;
+  });
+  save(); refreshAll(); toast('Коэффициенты сохранены');
 }
 
 function exportData() {
@@ -1045,87 +1079,125 @@ function importData(event) {
   const reader = new FileReader();
   reader.onload = e => {
     try {
-      const parsed = JSON.parse(e.target.result);
-      const imported = normalizeState(parsed);
-      if (confirm('Заменить текущие данные импортированными?')) {
-        const previous = cloneJson(state);
-        state = imported;
+      const parsed = JSON.parse(e.target.result); const imported = normalizeState(parsed);
+      showConfirm("Импорт данных", "Заменить текущие данные импортированными?", "Импортировать", () => {
+        const previous = cloneJson(state); state = imported;
         if (!save()) { state = previous; toast('Импорт не сохранён'); }
         else { refreshAll(); toast('Импортировано'); }
-      }
-    } catch (err) { console.error('Ошибка импорта:', err); toast('Ошибка файла: структура не распознана'); }
+      });
+    } catch (err) { toast('Ошибка файла'); }
     event.target.value = '';
   };
-  reader.onerror = () => { toast('Не удалось прочитать файл'); event.target.value = ''; };
   reader.readAsText(file);
 }
-function resetToDefaults() {
-  if (!confirm('Сбросить только список участников к заводскому? Настройки, контракты и архив останутся.')) return;
-  state.participants = cloneJson(DEFAULT_PARTICIPANTS); save(); refreshAll(); toast('Список участников сброшен');
+function resetToDefaults() { 
+  showConfirm("Сброс участников", "Сбросить список участников к заводскому? Настройки, контракты и архив останутся.", "Сбросить", () => {
+    state.participants = cloneJson(DEFAULT_PARTICIPANTS); save(); refreshAll(); toast('Список сброшен');
+  });
 }
-function clearAllData() {
-  if (!confirm('Удалить ВСЁ?')) return;
-  localStorage.removeItem(STORAGE_KEY); location.reload();
+function confirmClearAll() {
+  showConfirm("Очистить ВСЁ?", "Это действие удалит всех участников, все контракты, архив и настройки. Восстановить данные будет невозможно!", "Удалить всё", () => {
+    localStorage.removeItem(STORAGE_KEY); location.reload();
+  });
 }
 function newWeek() {
-  if (!confirm('Сохранить текущую неделю в архив и начать новую?')) return;
-  const previousState = cloneJson(state);
-  const currentStart = parseLocalDate(state.settings.startDate);
-  const currentEnd = new Date(currentStart); currentEnd.setDate(currentEnd.getDate() + 6);
-  if (state.directions.length || state.participants.some(p => finiteNumber(p.bonus, 0) !== 0)) {
-    state.history = state.history || [];
-    state.history.push({
-      id: `${state.settings.startDate}-${Date.now()}`,
-      startDate: state.settings.startDate,
-      endDate: toLocalDateString(currentEnd),
-      archivedAt: new Date().toISOString(),
-      grossProfit: totalProfit(),
-      paidFund: totalPremiumFund(),
-      recipients: getPayouts().length,
-      participants: cloneJson(state.participants),
-      directions: cloneJson(state.directions),
-      settings: cloneJson(state.settings)
+  showConfirm("Новая неделя", "Сохранить текущую неделю в архив и начать новую? Текущие вклады и надбавки очистятся.", "Начать", () => {
+    const previousState = cloneJson(state);
+    const currentStart = parseLocalDate(state.settings.startDate);
+    const currentEnd = new Date(currentStart); currentEnd.setDate(currentEnd.getDate() + 6);
+    if (state.directions.length || state.participants.some(p => finiteNumber(p.bonus, 0) !== 0)) {
+      state.history.push({ id: `${state.settings.startDate}-${Date.now()}`, startDate: state.settings.startDate, endDate: toLocalDateString(currentEnd), grossProfit: totalProfit(), paidFund: totalPremiumFund(), recipients: getPayouts().length, participants: cloneJson(state.participants), directions: cloneJson(state.directions), settings: cloneJson(state.settings) });
+    }
+    const nextStart = new Date(currentStart); nextStart.setDate(nextStart.getDate() + 7);
+    state.settings.startDate = toLocalDateString(nextStart);
+    state.directions.forEach(d => {
+      d.days.forEach((day, i) => { const date = new Date(nextStart); date.setDate(date.getDate() + i); day.date = formatShortDate(date); day.responsible = ''; day.costs = CONTRACTS[d.type]?.openCost || 0; });
+      d.participants = [];
     });
-  }
-  const nextStart = new Date(currentStart); nextStart.setDate(nextStart.getDate() + 7);
-  state.settings.startDate = toLocalDateString(nextStart);
-  state.directions.forEach(d => {
-    d.days.forEach((day, i) => {
-      const date = new Date(nextStart); date.setDate(date.getDate() + i);
-      day.date = formatShortDate(date);
-      day.responsible = '';
-      day.costs = CONTRACTS[d.type]?.openCost || 0;
-    });
-    d.participants = [];
+    state.participants.forEach(p => p.bonus = 0);
+    if (!save()) { state = previousState; refreshAll(); return; }
+    refreshAll(); toast('Новая неделя начата');
   });
-  state.participants.forEach(p => p.bonus = 0);
-  if (!save()) { state = previousState; refreshAll(); return; }
-  refreshAll(); toast('Неделя сохранена в архив, новая неделя начата');
+}
+
+function renderHistory() {
+  const container = $('week-history');
+  if (!container) return;
+  if (!state.history || !state.history.length) { container.innerHTML = '<p class="empty">Архив пуст</p>'; return; }
+  container.innerHTML = [...state.history].reverse().map(item => {
+    const start = parseLocalDate(item.startDate), end = parseLocalDate(item.endDate);
+    const label = `${formatShortDate(start)} — ${formatShortDate(end)}`;
+    return `<div class="mobile-card" style="display:flex;justify-content:space-between;flex-wrap:wrap; align-items:center;">
+      <div style="flex:1;"><strong style="color:var(--orange-light);">${label}</strong><br><span style="font-size:12px; color:var(--text-muted);">Выплаты: ${Math.round(finiteNumber(item.paidFund)).toLocaleString('ru-RU')} $</span></div>
+      <div style="display:flex; gap:5px;">
+        <button class="btn btn-outline" style="padding:6px 10px; min-height:auto; font-size:12px;" onclick="downloadArchiveWeek('${item.id}')">📥 JSON</button>
+        <button class="btn btn-danger" style="padding:6px 10px; min-height:auto; font-size:12px;" onclick="deleteArchiveWeek('${item.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function deleteArchiveWeek(id) {
+  showConfirm("Удалить архив?", "Вы уверены, что хотите удалить эту запись из архива? Восстановить её будет невозможно.", "Удалить", () => {
+    state.history = state.history.filter(h => h.id !== id);
+    save(); renderHistory(); toast('Архив удален');
+  });
+}
+
+function confirmClearArchive() {
+  if (!state.history || !state.history.length) return toast('Архив уже пуст');
+  showConfirm("Очистить архив?", "Удалить ВСЕ сохраненные недели? Это действие необратимо.", "Удалить все", () => {
+    state.history = [];
+    save(); renderHistory(); toast('Архив очищен');
+  });
+}
+
+function downloadArchiveWeek(id) {
+  const item = state.history.find(h => h.id === id);
+  if (!item) return toast('Не найдено');
+  const blob = new Blob([JSON.stringify(item, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = `archive_${item.startDate}.json`; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Скачано');
+}
+
+function copyExport() {
+  const text = generateExportText();
+  if (text.split('\n').length <= 1) return toast('Нет данных');
+  const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); toast('Скопировано'); };
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => toast('Скопировано в буфер')).catch(fallback);
+  else fallback();
+}
+function downloadExport() {
+  const text = generateExportText();
+  if (text.split('\n').length <= 1) return toast('Нет данных');
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = `premiums_${state.settings.startDate}.txt`; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Файл скачан');
 }
 
 function refreshAll() { renderDashboard(); renderParticipants(); renderDirections(); renderSettings(); renderHistory(); }
-function toggleMenu() { document.getElementById('main-nav').classList.toggle('open'); }
+function toggleMenu() { $('main-nav').classList.toggle('open'); }
 
 document.querySelectorAll('nav button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('page-' + btn.dataset.page).classList.add('active');
-    document.getElementById('main-nav').classList.remove('open');
-    refreshAll();
+    btn.classList.add('active'); $('page-' + btn.dataset.page).classList.add('active');
+    $('main-nav').classList.remove('open'); refreshAll();
   });
 });
 
 try {
   if (!sessionStorage.getItem('splashShown')) {
     sessionStorage.setItem('splashShown', 'true');
-    setTimeout(() => document.getElementById('splash-screen')?.classList.add('hidden'), 2800);
-  } else { document.getElementById('splash-screen').style.display = 'none'; }
-} catch (e) { document.getElementById('splash-screen').style.display = 'none'; }
+    setTimeout(() => $('splash-screen')?.classList.add('hidden'), 2800);
+  } else { $('splash-screen').style.display = 'none'; }
+} catch (e) { $('splash-screen').style.display = 'none'; }
 
 load();
 refreshAll();
 </script>
 </body>
-  </html>
+</html>
